@@ -26,7 +26,6 @@ def check_correct_time(time: dt.time) -> bool:
         for time_check in storage_data.keys():
             if dt.datetime.strptime(time_check, FORMAT).time() >= time:
                 return False
-
     return True
 
 
@@ -86,8 +85,8 @@ def accept_package(data: Package) -> Union[Storage, str]:
     time: str
     steps: int
     time, steps = data
-    pack_time: dt.time = dt.datetime.strptime(time, FORMAT).time()
 
+    pack_time: dt.time = dt.datetime.strptime(time, FORMAT).time()
     if check_correct_time(pack_time) is False:
         return "Некорректное значение времени"
 
@@ -99,8 +98,10 @@ def accept_package(data: Package) -> Union[Storage, str]:
 
     spent_calories: float = get_spent_calories(dist, pack_time)
     achievement: str = get_achievement(dist)
+
     print(get_message(pack_time, day_steps, dist, spent_calories, achievement))
     storage_data.update({data})
+
     return storage_data
 
 
